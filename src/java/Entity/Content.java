@@ -24,6 +24,7 @@ public class Content implements Serializable {
     private int id;
     private int version;
     private String text;
+    private String author;
 
     public Content() {
     }
@@ -50,5 +51,13 @@ public class Content implements Serializable {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

@@ -28,12 +28,13 @@ public class ThemenVerwaltung implements Serializable {
         Thema t = new Thema();
         Content c = new Content();
         c.setText("Das ist ein Beispieltext");
+        c.setAuthor("testautor");
         c.setVersion(0);
-        t.setName("TestThema");
+        t.setName("Startseite");
         t.addContent(c);
         em.persist(t);
     }
-
+    
     /**
      * Persistiert ein Objekt in der Datenbank
      *
@@ -59,7 +60,7 @@ public class ThemenVerwaltung implements Serializable {
      * @return Der Eintrag, der aus der Suche resultiert
      */
     public Thema findByName(String name) {
-        Thema erg = em.createQuery("SELECT t FROM THEMA t", Thema.class).getSingleResult();
+        Thema erg = em.createQuery("SELECT t FROM Thema t WHERE t.name=\""+name+"\"", Thema.class).getSingleResult();
         return erg;
     }
 
