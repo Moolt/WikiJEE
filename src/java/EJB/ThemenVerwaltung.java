@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stateless;
+package EJB;
 
 import Entity.Content;
 import Entity.Thema;
@@ -31,10 +31,7 @@ public class ThemenVerwaltung implements Serializable {
         c.setVersion(0);
         t.setName("TestThema");
         t.addContent(c);
-
-        em.getTransaction().begin();
         em.persist(t);
-        em.getTransaction().commit();
     }
 
     /**
