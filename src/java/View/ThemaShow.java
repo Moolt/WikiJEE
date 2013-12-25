@@ -7,9 +7,12 @@ package View;
 
 import EJB.ThemenVerwaltung;
 import Entity.Thema;
+import java.io.Serializable;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,11 +20,13 @@ import javax.inject.Named;
  *
  * @author Moolt
  */
-@RequestScoped
+@ViewScoped
 @Named("show")
-public class ThemaShow {
-
+public class ThemaShow implements Serializable  {
+    private static final Logger LOGGER = Logger.getLogger(ThemaShow.class.toString());
+    private final static String PAGE = "./show.xhtml";
     private final static String EDIT = "./edit.xhtml";
+    
     @EJB
     private ThemenVerwaltung tv;
     @Inject
@@ -33,11 +38,12 @@ public class ThemaShow {
 
     @PostConstruct
     public void init() {
-        thema = tv.findByName(session.getAusgewaehltesThemaName());
+        thema = tv.findByName(session.getThema());
         angezeigteVersion = thema.getLatestVersion();
-        aktuelleVersion = thema.getLatestVersion();
+        aktuelleVersion = thema.getLatestVersion();        
+        this.session.pushToBacklog(PAGE);
     }
-
+    
     public String getContent() {
         return thema.getContent(angezeigteVersion).getText();
     }

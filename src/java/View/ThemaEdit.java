@@ -8,20 +8,26 @@ package View;
 import EJB.ThemenVerwaltung;
 import javax.ejb.EJB;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import Entity.Thema;
+import java.io.Serializable;
+import java.util.logging.Logger;
+import javax.annotation.PreDestroy;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  *
  * @author Moolt
  */
-@RequestScoped
+@ViewScoped
 @Named("edit")
-public class ThemaEdit {
+public class ThemaEdit implements Serializable {
+
+    private static final Logger LOGGER = Logger.getLogger(ThemaShow.class.toString());
+    private final static String PAGE = "./edit.xhtml";
     private final static String SHOW = "./show.xhtml";
-    
+
     @EJB
     private ThemenVerwaltung tv;
     @Inject
@@ -32,8 +38,9 @@ public class ThemaEdit {
 
     @PostConstruct
     public void init() {
-        thema = tv.findByName(session.getAusgewaehltesThemaName());
-        bearbeiteterContent = thema.getContent(thema.getLatestVersion()).getText();
+        this.thema = tv.findByName(session.getThema());
+        this.bearbeiteterContent = thema.getContent(thema.getLatestVersion()).getText();
+        this.session.pushToBacklog(PAGE);
     }
 
     public String getBearbeiteterContent() {

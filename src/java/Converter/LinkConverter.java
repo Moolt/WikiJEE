@@ -32,6 +32,6 @@ public class LinkConverter implements Converter {
 
         //Matcht alle Teilausdruecke, die mit [ beginnen und mit ] enden und innerhalb
         //nicht die zeichen [ oder ] verwenden und wandelt sie in html-link form um
-        return value.toString().replaceAll("\\[([^\\[\\]<]*)\\]", "<a href=\"./show.xhtml?thema=$1\">$1</a>");
+        return value.toString().replaceAll("\\[([^\\[\\]]*)\\]", "<a href=\"./show.xhtml?thema=$1\">$1</a>");
     }
 }

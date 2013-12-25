@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <f:metadata>
-        <f:viewParam name="thema" value="#{usession.ausgewaehltesThemaName}" />
+        <f:viewParam name="thema" value="#{usession.thema}" />
     </f:metadata>
     
     <h:head>
@@ -38,6 +38,7 @@
             </h:inputText>
 
             <br/>
+            <h:commandButton value="Zurück" action="#{usession.zurueck()}"/>
             <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}"/> 
         </h:form>
 

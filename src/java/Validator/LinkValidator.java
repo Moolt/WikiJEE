@@ -21,7 +21,7 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator("Validator.LinkValidator")
 public class LinkValidator implements Validator {
     //eine folge von zeichen und in [ ]-umschlossenen zeichen
-    private static final String LINK_PATTERN = "(\\[[^\\[\\]<]+\\]|[^\\[\\]<])*";
+    private static final String LINK_PATTERN = "(\\[[^\\[\\]]+\\]|[^\\[\\]])*";
 
     private Pattern pattern;
     private Matcher matcher;
