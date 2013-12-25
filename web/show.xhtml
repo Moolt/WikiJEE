@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+        <f:viewParam name="thema" value="#{usession.ausgewaehltesThemaName}" />
+    </f:metadata>
+    
+    <h:head>
+        <title>Mein Wiki, meine Regeln</title>
+    </h:head>
+    <h:body>
+        <h:form id="name">
+            Nutzername: 
+            <h:inputText value="#{usession.nutzerName}">
+                <f:ajax event="keyup" execute="@form" render=":text"/>
+            </h:inputText>
+        </h:form>
+
+        <h2>#{show.titel}</h2>
+        
+        <h:panelGroup id="thema">
+            <div style="white-space: pre-wrap">
+                <h:outputText id="urlInput" escape="false" value="#{show.content}">
+                    <f:converter converterId="Converter.LinkConverter" />
+                </h:outputText>
+            </div>
+            <br/>
+            angezeigte version: #{show.angezeigteVersion} von #{show.angezeigterAutor} <br/>
+            neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} <br/>                     
+        </h:panelGroup>
+
+        <h:form id="text">
+            <h:inputText value="#{show.angezeigteVersion}">								
+                <f:ajax event="keyup" execute="@form" render=":thema"/>
+            </h:inputText>
+
+            <br/>
+            <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}"/> 
+        </h:form>
+
+    </h:body>
+</html>

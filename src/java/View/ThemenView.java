@@ -4,7 +4,6 @@
  */
 package View;
 
-import Entity.Thema;
 import EJB.ThemenVerwaltung;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;

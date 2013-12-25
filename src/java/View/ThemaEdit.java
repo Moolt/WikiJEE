@@ -20,7 +20,8 @@ import javax.inject.Named;
 @RequestScoped
 @Named("edit")
 public class ThemaEdit {
-
+    private final static String SHOW = "./show.xhtml";
+    
     @EJB
     private ThemenVerwaltung tv;
     @Inject
@@ -46,7 +47,7 @@ public class ThemaEdit {
     public String uebernehmen() {
         String name = session.getNutzerName();
         tv.neueVersionSpeichern(thema, bearbeiteterContent, name);
-        return "./index.xhtml";
+        return SHOW;
     }
 
     public String getTitel() {
