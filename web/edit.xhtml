@@ -12,10 +12,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width"/>
     </head>
     <body>
-        <h2>#{wiki.titel}</h2> <br/>
+        <h2>#{edit.titel}</h2> <br/>
         <h:form>
-            <h:inputTextarea value="#{wiki.bearbeiteterContent}"/> <br/>
-            <h:commandButton value="Übernehmen" action="#{wiki.neueVersionSpeichern()}"/>
+            <h:inputTextarea value="#{edit.bearbeiteterContent}"/> <br/>
+            <h:commandButton value="Übernehmen" action="#{edit.uebernehmen()}"/>
         </h:form>
     </body>
 </html>
