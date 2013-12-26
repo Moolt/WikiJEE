@@ -12,15 +12,14 @@ import javax.inject.Inject;
 import Entity.Thema;
 import java.io.Serializable;
 import java.util.logging.Logger;
-import javax.annotation.PreDestroy;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
  *
  * @author Moolt
  */
-@ViewScoped
+@RequestScoped
 @Named("edit")
 public class ThemaEdit implements Serializable {
 

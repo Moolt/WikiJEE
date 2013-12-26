@@ -29,18 +29,18 @@
             </div>
             <br/>
             angezeigte version: #{show.angezeigteVersion} von #{show.angezeigterAutor} <br/>
-            neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} <br/>                     
+            neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} <br/>                  
         </h:panelGroup>
 
         <h:form id="text">
-            <h:inputText value="#{show.angezeigteVersion}">								
+            <h:inputText id="vinput" value="#{show.angezeigteVersion}" required="true">								
+                <f:validateLongRange minimum="0" maximum="#{show.aktuelleVersion}"/>
                 <f:ajax event="keyup" execute="@form" render=":thema"/>
             </h:inputText>
-
+            
             <br/>
             <h:commandButton value="Zurück" action="#{usession.zurueck()}"/>
             <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}"/> 
         </h:form>
-
     </h:body>
 </html>
