@@ -30,7 +30,7 @@ and open the template in the editor.
                     </form>
                     <h:form id="name" styleClass="navbar-form navbar-right">
                         <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
-                            <f:ajax event="keyup" execute="@form" render=":text"></f:ajax>
+                            <f:ajax event="keyup" execute="@form" render=":text"/>
                         </h:inputText>
                     </h:form>
                     <!--form class="navbar-form navbar-right" role="form"> 
@@ -41,11 +41,3 @@ and open the template in the editor.
         </ui:composition>
     </body>
 </html>
-<!--
-<h:form id="name" styleClass="navbar-form navbar-right">
-            Nutzername: 
-            <h:inputText value="#{usession.nutzerName}" placeholder="Nutzername" styleClass="form-control">
-                <f:ajax event="keyup" execute="@form" render=":text"/>
-            </h:inputText>
-        </h:form>
--->
