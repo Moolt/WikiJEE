@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <body>
+        <ui:composition>
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+		</button-->
+                    <a class="navbar-brand" href="#">Weni Widi Wiki</a>	  
+                </div>
+                <div class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+                        	<input type="text" class="form-control" placeholder="Search"></input>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <h:form id="name" styleClass="navbar-form navbar-right">
+                        <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
+                            <f:ajax event="keyup" execute="@form" render=":text"></f:ajax>
+                        </h:inputText>
+                    </h:form>
+                    <!--form class="navbar-form navbar-right" role="form"> 
+                        <input type="text" placeholder="Nutzername" class="form-control"></input>
+                    </form-->
+                </div>
+            </div>
+        </ui:composition>
+    </body>
+</html>
+<!--
+<h:form id="name" styleClass="navbar-form navbar-right">
+            Nutzername: 
+            <h:inputText value="#{usession.nutzerName}" placeholder="Nutzername" styleClass="form-control">
+                <f:ajax event="keyup" execute="@form" render=":text"/>
+            </h:inputText>
+        </h:form>
+-->

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <f:metadata>
         <f:viewParam name="thema" value="#{usession.thema}" />
@@ -10,14 +11,25 @@
     
     <h:head>
         <title>Mein Wiki, meine Regeln</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
+        <link type="text/css" rel="stylesheet" href="css/basic.css" />
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <h:form id="name">
+        <div class="container">
+        <div id="header">
+            <ui:insert name="header">
+                <ui:include src="/templates/commonHeader.xhtml" />
+            </ui:insert>
+	</div>
+        <!--h:form id="name">
             Nutzername: 
             <h:inputText value="#{usession.nutzerName}">
                 <f:ajax event="keyup" execute="@form" render=":text"/>
             </h:inputText>
-        </h:form>
+        </h:form-->
 
         <h2>#{show.titel}</h2>
         
@@ -42,5 +54,6 @@
             <h:commandButton value="Zurück" action="#{usession.zurueck()}"/>
             <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}"/> 
         </h:form>
+        </div>
     </h:body>
 </html>
