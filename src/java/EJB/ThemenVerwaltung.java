@@ -31,7 +31,7 @@ public class ThemenVerwaltung implements Serializable {
     public void testdaten() {
         Thema t = new Thema();
         Content c = new Content();
-        c.setText("Das ist ein Beispieltext");
+        c.setText("Das ist ein Beispieltext um zu schaun ob es funktioniert");
         c.setAuthor("testautor");
         c.setVersion(0);
         t.setName("Startseite");
@@ -105,7 +105,7 @@ public class ThemenVerwaltung implements Serializable {
         List<String> ermittelteThemen = new LinkedList<>();
         Matcher m = Pattern.compile("\\[([^\\[\\]<]*)\\]").matcher(str);
         while (m.find()) {
-            String gefundenesThema = m.group(1).toLowerCase();
+            String gefundenesThema = m.group(1);
             if (!this.themaExists(gefundenesThema)) {
                 Thema neuesThema = new Thema();
                 Content neuerContent = new Content();
