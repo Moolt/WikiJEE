@@ -6,3 +6,39 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+p{
+    margin-left: -30px;
+}
+
+.back{
+    margin-left:-30px;
+}
+
+.ui-editor, .ui-widget-content{
+    margin-left:-30px;
+}
+
+h1{
+    margin-left: -30px;
+    margin-top : -15px;
+}
+
+.footbox p{
+    margin-left: 5px;
+}
+
+.footbox {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 16px;;
+  font-weight: 600;
+  line-height: 0,1;
+  color: inherit;
+  background-color: #F5F5F7;
+}
+
+textarea{
+    margin-top:25px;
+    margin-left: -30px;
+}

@@ -19,41 +19,44 @@
     </h:head>
     <h:body>
         <div class="container">
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/templates/commonHeader.xhtml" />
-            </ui:insert>
-	</div>
-        <!--h:form id="name">
-            Nutzername: 
-            <h:inputText value="#{usession.nutzerName}">
-                <f:ajax event="keyup" execute="@form" render=":text"/>
-            </h:inputText>
-        </h:form-->
-
-        <h2>#{show.titel}</h2>
-        
-        <h:panelGroup id="thema">
-            <div style="white-space: pre-wrap">
-                <h:outputText id="urlInput" escape="false" value="#{show.content}">
-                    <f:converter converterId="Converter.LinkConverter" />
-                </h:outputText>
+            <div id="header">
+                <ui:insert name="header">
+                    <ui:include src="/templates/commonHeader.xhtml" />
+                </ui:insert>
             </div>
-            <br/>
-            angezeigte version: #{show.angezeigteVersion} von #{show.angezeigterAutor} <br/>
-            neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} <br/>                  
-        </h:panelGroup>
-
-        <h:form id="text">
-            <h:inputText id="vinput" value="#{show.angezeigteVersion}" required="true">								
-                <f:validateLongRange minimum="0" maximum="#{show.aktuelleVersion}"/>
-                <f:ajax event="keyup" execute="@form" render=":thema"/>
-            </h:inputText>
+            <div class="jumbotron">
+                <h1>#{show.titel}</h1>
+                
+                <h:panelGroup id="thema">
+                    <p>
+                    <h:outputText id="urlInput" escape="false" value="#{show.content}">
+                        <f:converter converterId="Converter.LinkConverter" />
+                    </h:outputText>        
+                    </p>   
+              
+                </h:panelGroup>
+            </div>
             
-            <br/>
-            <h:commandButton value="Zurück" action="#{usession.zurueck()}"/>
-            <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}"/> 
-        </h:form>
+            <div class="footbox">
+                <h:panelGroup id="aversion">
+                    <p>angezeigte version: #{show.angezeigteVersion} von #{show.angezeigterAutor}</p>
+                    <p> neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} </p> 
+                </h:panelGroup>
+            
+                <h:form id="text">
+                    <h:inputText id="vinput" value="#{show.angezeigteVersion}" required="true" styleClass="form-control">								
+                        <f:validateLongRange minimum="0" maximum="#{show.aktuelleVersion}"/>
+                        <f:ajax event="keyup" execute="@form" render=":thema"/>
+                        <f:ajax event="keyup" execute="@form" render=":aversion"/>
+                    </h:inputText>
+
+                    <br/>
+                    <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default"/>
+                    <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}" styleClass="btn btn-default"/> 
+                </h:form>
+            </div>
+
+           
         </div>
     </h:body>
 </html>

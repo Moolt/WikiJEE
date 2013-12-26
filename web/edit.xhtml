@@ -4,23 +4,50 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:metadata>
+        <f:viewParam name="thema" value="#{usession.thema}" />
+    </f:metadata>   
+    
+    <h:head>
+        <title>Mein Wiki, meine Regeln</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
+        <link type="text/css" rel="stylesheet" href="css/basic.css" />
+        <!--script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script-->
         <meta name="viewport" content="width=device-width"/>
-    </head>
-    <body>
-        <h2>#{edit.titel}</h2> <br/>
-        <h:form>
-            <h:inputTextarea value="#{edit.bearbeiteterContent}" required="true" cols="40" rows="10">
-                <f:validator validatorId="Validator.LinkValidator" />
-            </h:inputTextarea>
-            <br/>
-            <h:commandButton value="Zurück" action="#{usession.zurueck()}"/>
-            <h:commandButton value="Übernehmen" action="#{edit.uebernehmen()}"/>
-        </h:form>
-    </body>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div id="header">
+                <ui:insert name="header">
+                    <ui:include src="/templates/commonHeader.xhtml" />
+                </ui:insert>
+            </div>
+             <div class="jumbotron">
+                <h1>#{edit.titel}</h1>  
+                <h:form id="text">  
+  
+                <p:editor id="editor" value="#{edit.bearbeiteterContent}" width="600"/>  
+  
+                <h:panelGrid columns="2" style="margin-top:10px">  
+                <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default back"/>  
+                <h:commandButton value="Submit" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>
+                </h:panelGrid>  
+                 <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
+                    <h:outputText id="display" value="#{edit.bearbeiteterContent}" escape="false" />  
+                 </p:dialog>  
+                </h:form>  
+            </div>
+
+            
+        </div>
+    </h:body>
 </html>
