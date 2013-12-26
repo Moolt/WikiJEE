@@ -92,7 +92,7 @@ public class ThemenVerwaltung implements Serializable {
     }
 
     public void neueVersionSpeichern(Thema thema, String neuerContent, String nutzerName) {
-        List<String> themen = this.erstelleNeueThemen(neuerContent);
+        this.erstelleNeueThemen(neuerContent);
         Content neueVersion = new Content();
         neueVersion.setAuthor(nutzerName);
         neueVersion.setVersion(thema.getLatestVersion() + 1);
@@ -101,8 +101,7 @@ public class ThemenVerwaltung implements Serializable {
         this.update(thema);
     }
 
-    private List<String> erstelleNeueThemen(String str) {
-        List<String> ermittelteThemen = new LinkedList<>();
+    private void erstelleNeueThemen(String str) {
         Matcher m = Pattern.compile("\\[([^\\[\\]<]*)\\]").matcher(str);
         while (m.find()) {
             String gefundenesThema = m.group(1);
@@ -117,6 +116,5 @@ public class ThemenVerwaltung implements Serializable {
                 this.persist(neuesThema);
             }
         }
-        return ermittelteThemen;
     }
 }
