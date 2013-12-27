@@ -21,11 +21,12 @@ import javax.inject.Named;
  */
 @ViewScoped
 @Named("show")
-public class ThemaShow implements Serializable  {
+public class ThemaShow implements Serializable {
+
     private static final Logger LOGGER = Logger.getLogger(ThemaShow.class.toString());
     private final static String PAGE = "./show.xhtml";
     private final static String EDIT = "./edit.xhtml";
-    
+
     @EJB
     private ThemenVerwaltung tv;
     @Inject
@@ -35,46 +36,92 @@ public class ThemaShow implements Serializable  {
     private int aktuelleVersion;
     private int angezeigteVersion;
 
+    
+    /**
+     * Initialisiert die Objektvariablen
+     */
     @PostConstruct
     public void init() {
-        thema = tv.findByName(session.getThema());
-        angezeigteVersion = thema.getLatestVersion();
-        aktuelleVersion = thema.getLatestVersion();        
-        this.session.pushToBacklog(PAGE);
-    }
-    
-    public String getContent() {
-        return thema.getContent(angezeigteVersion).getText();
+        try {
+            thema = tv.findByName(session.getThema());
+            angezeigteVersion = thema.getLatestVersion();
+            aktuelleVersion = thema.getLatestVersion();
+            this.session.pushToBacklog(PAGE);
+        } catch (Exception e) {
+
+        }
     }
 
-    public String getTitel() {
-        return thema.getName();
-    }
-
-    public int getAktuelleVersion() {
-        return aktuelleVersion;
-    }
-
-    public void setAktuelleVersion(int aktuelleVersion) {
-        this.aktuelleVersion = aktuelleVersion;
-    }
-
-    public int getAngezeigteVersion() {
-        return angezeigteVersion;
-    }
-
-    public void setAngezeigteVersion(int angezeigteVersion) {
-        this.angezeigteVersion = angezeigteVersion;
-    }
-
+    /**
+     * 
+     * @return Verweis zur edit.xhtml
+     */
     public String bearbeiten() {
         return EDIT;
     }
 
+    /**
+     * 
+     * @return Der Textinhalt der angezeigten Version des ausgewaehlten Themas
+     */
+    public String getContent() {
+        return thema.getContent(angezeigteVersion).getText();
+    }
+
+    /**
+     * 
+     * @return Der Titel es angezeigten/ zu bearbeitenden Themas
+     */
+    public String getTitel() {
+        return thema.getName();
+    }
+
+    /**
+     * 
+     * @return Die Versionsnummer der aktuellsten Version eines Themas
+     */
+    public int getAktuelleVersion() {
+        return aktuelleVersion;
+    }
+
+    /**
+     * 
+     * @param aktuelleVersion Die Versionsnummer der aktuellsten Version eines Themas
+     */
+    public void setAktuelleVersion(int aktuelleVersion) {
+        this.aktuelleVersion = aktuelleVersion;
+    }
+
+    /**
+     * 
+     * @return Die Versionsnummer der momentan angezeigten Version eines Themas
+     */
+    public int getAngezeigteVersion() {
+        return angezeigteVersion;
+    }
+
+    /**
+     * 
+     * @param angezeigteVersion Die Versionsnummer der momentan angezeigten
+     * Version eines Themas
+     */
+    public void setAngezeigteVersion(int angezeigteVersion) {
+        this.angezeigteVersion = angezeigteVersion;
+    }
+
+    /**
+     *
+     * @return Der Name des Autors, der die aktuellste Version des angezeigten
+     * Themas verfasst hat
+     */
     public String getAktuellerAutor() {
         return this.thema.getContent(aktuelleVersion).getAuthor();
     }
 
+    /**
+     *
+     * @return Der Name des Autors, dessen Version angezeigt wird
+     */
     public String getAngezeigterAutor() {
         return this.thema.getContent(angezeigteVersion).getAuthor();
     }

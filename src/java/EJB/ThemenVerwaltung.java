@@ -7,7 +7,6 @@ package EJB;
 import Entity.Content;
 import Entity.Thema;
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,17 +25,6 @@ public class ThemenVerwaltung implements Serializable {
     private EntityManager em;
 
     public void ThemenVerwaltung() {
-    }
-
-    public void testdaten() {
-        Thema t = new Thema();
-        Content c = new Content();
-        c.setText("Das ist ein Beispieltext um zu schaun ob es funktioniert");
-        c.setAuthor("testautor");
-        c.setVersion(0);
-        t.setName("Startseite");
-        t.addContent(c);
-        em.persist(t);
     }
 
     /**
@@ -80,15 +68,20 @@ public class ThemenVerwaltung implements Serializable {
 
     /**
      * Sucht in der Datenbank, ob bereits ein Thema mit dem Namen existiert
+     *
      * @param name Der Name nach dem gesucht werden soll
      * @return True, wenn ein Thema mit dem Namen gefunden wurde
      */
     public boolean themaExists(String name) {
         return em.createQuery("SELECT t FROM Thema t WHERE t.name=\"" + name + "\"", Thema.class).getResultList().size() > 0;
     }
-    
-    public void refresh(Object o){
+
+    public void refresh(Object o) {
         em.refresh(o);
+    }
+
+    public List<Thema> searchByName(String suchbegriff) {
+        return em.createQuery("SELECT t FROM Thema t WHERE t.name LIKE \"%" + suchbegriff + "%\"", Thema.class).getResultList();
     }
 
     public void neueVersionSpeichern(Thema thema, String neuerContent, String nutzerName) {
