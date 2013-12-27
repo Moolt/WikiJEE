@@ -88,4 +88,8 @@ public class ThemaSearch implements Serializable {
     public void setErgebnisse(List<Thema> ergebnisse) {
         this.ergebnisse = ergebnisse;
     }
+    
+    public int getAnzahlErgebnisse() {
+        return this.ergebnisse.size();
+    }
 }

@@ -20,8 +20,12 @@ p{
 }
 
 h1{
-    margin-left: -30px;
-    margin-top : -15px;
+    margin-left:-30px;
+    margin-top :-15px;
+}
+
+h3, table{
+    margin-left:-30px;
 }
 
 .footbox p{
