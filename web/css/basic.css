@@ -19,6 +19,15 @@ p{
     margin-left:-30px;
 }
 
+.navbar-collapse .btn{
+    margin-left:5px;
+    margin-bot:1px;
+}
+
+.bbutton{
+    margin-top:8px;
+}
+
 .ui-editor, .ui-widget-content{
     margin-left:-30px;
     width: 80%;

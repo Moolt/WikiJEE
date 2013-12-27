@@ -14,19 +14,22 @@ and open the template in the editor.
             <div class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="./faces/show.xhtml">Weni Widi Wiki</a>	  
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
+                    <h:button value="Zurück" onclick="#{usession.zurueck()}" styleClass="btn btn-default bbutton"/>
                 </div>
+                <h:form id="name" styleClass="navbar-form navbar-left">
+                        <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
+                            <f:ajax event="keyup" execute="@form" render=":text"/>
+                        </h:inputText>
+                </h:form>
+                
                 <div class="navbar-collapse collapse">
-                    <h:form styleClass="navbar-form navbar-left">
+                    <h:form styleClass="navbar-form navbar-right">
 			<div class="form-group">
                             <h:inputText value="#{search.suchbegriff}" styleClass="form-control" pt:placeholder="Search"/>
 			</div>
                         <h:commandButton value="Search" action="#{search.suchen()}" styleClass="btn btn-default"/>
-                    </h:form>
-                    <h:form id="name" styleClass="navbar-form navbar-right">
-                        <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
-                            <f:ajax event="keyup" execute="@form" render=":text"/>
-                        </h:inputText>
-                    </h:form>
+                    </h:form>              
                 </div>
             </div>
         </ui:composition>

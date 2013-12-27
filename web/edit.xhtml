@@ -38,7 +38,7 @@ and open the template in the editor.
                     <p:editor id="editor" value="#{edit.bearbeiteterContent}" validator="Validator.EditorValidator"/>
                         <h:panelGrid columns="2" style="margin-top:10px" > 
                             <h:panelGroup>   
-                                <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default"/>  
+                                
                                 <h:commandButton  value="Übernehmen" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
                             </h:panelGroup>
                         </h:panelGrid>  
@@ -46,6 +46,9 @@ and open the template in the editor.
                      <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
                         <h:outputText id="display" value="#{edit.bearbeiteterContent}" escape="false" />  
                      </p:dialog>  
+                </h:form>
+                <h:form>
+                    <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default"/>  
                 </h:form>
              </div>
 
