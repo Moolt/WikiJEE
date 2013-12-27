@@ -42,7 +42,6 @@ public class ThemaEdit implements Serializable {
     public void init() {
         this.thema = tv.findByName(session.getThema());
         this.bearbeiteterContent = thema.getContent(thema.getLatestVersion()).getText();
-        this.session.pushToBacklog(PAGE);
     }
 
     /**
