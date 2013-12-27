@@ -16,12 +16,12 @@ and open the template in the editor.
                     <a class="navbar-brand">Weni Widi Wiki</a>	  
                 </div>
                 <div class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-left" role="search">
+                    <h:form styleClass="navbar-form navbar-left">
 			<div class="form-group">
-                            <input value="#{search.suchbegriff}" type="text" class="form-control" placeholder="Search"></input>
+                            <h:inputText value="#{search.suchbegriff}" styleClass="form-control" pt:placeholder="Search"/>
 			</div>
-                        <button action="#{search.suchen()}" type="submit" class="btn btn-default">Search</button>
-                    </form>
+                        <h:commandButton value="Search" action="#{search.suchen()}" styleClass="btn btn-default"/>
+                    </h:form>
                     <h:form id="name" styleClass="navbar-form navbar-right">
                         <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
                             <f:ajax event="keyup" execute="@form" render=":text"/>
