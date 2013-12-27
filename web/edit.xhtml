@@ -31,13 +31,15 @@ and open the template in the editor.
                 </ui:insert>
             </div>
              <div class="jumbotron">
-                <h1>#{edit.titel}</h1>  
-                <h:form id="test">
-                    <p:editor id="editor" value="#{edit.bearbeiteterContent}" width="600"/>  
+                <h1>#{edit.titel}</h1>
+                <!-- Das Template commonHeader benoetigt eine id=text fuer den Ajax Request -->
+                <h:form id="text"></h:form>
+                <h:form>
+                    <p:editor id="editor" value="#{edit.bearbeiteterContent}" width="600" validator="Validator.NameValidator"/>
                         <h:panelGrid columns="2" style="margin-top:10px" > 
-                            <h:panelGroup id="text">   
+                            <h:panelGroup>   
                                 <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default back"/>  
-                                <h:commandButton  value="Übernehmen" rendered="#{usession.nameVorhanden()}" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
+                                <h:commandButton  value="Übernehmen" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
                             </h:panelGroup>
                         </h:panelGrid>  
 
