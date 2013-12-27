@@ -46,7 +46,6 @@ public class ThemaShow implements Serializable {
             thema = tv.findByName(session.getThema());
             angezeigteVersion = thema.getLatestVersion();
             aktuelleVersion = thema.getLatestVersion();
-            this.session.pushToBacklog(PAGE);
         } catch (Exception e) {
 
         }
