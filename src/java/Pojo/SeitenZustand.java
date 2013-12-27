@@ -13,12 +13,10 @@ public class SeitenZustand {
 
     private String pageURL;
     private String thema;
-    private String name;
 
-    public SeitenZustand(String pageURL, String thema, String name) {
+    public SeitenZustand(String pageURL, String thema) {
         this.pageURL = pageURL;
         this.thema = thema;
-        this.name = name;
     }
 
     public String getPageURL() {
@@ -35,13 +33,5 @@ public class SeitenZustand {
 
     public void setThema(String thema) {
         this.thema = thema;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
