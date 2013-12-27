@@ -33,14 +33,14 @@ and open the template in the editor.
             </div>
              <div class="jumbotron">
                 <h1>#{edit.titel}</h1>  
-                <h:form id="text">  
-  
+                <h:form> 
                 <p:editor id="editor" value="#{edit.bearbeiteterContent}" width="600"/>  
-  
-                <h:panelGrid columns="2" style="margin-top:10px">  
-                <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default back"/>  
-                <h:commandButton value="Submit" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>
-                </h:panelGrid>  
+                <h:panelGroup id="text">
+                    <h:panelGrid columns="2" style="margin-top:10px">  
+                    <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default back"/>  
+                    <h:commandButton value="Übernehmen" rendered="#{usession.nameVorhanden()}" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
+                    </h:panelGrid>  
+                </h:panelGroup>
                  <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
                     <h:outputText id="display" value="#{edit.bearbeiteterContent}" escape="false" />  
                  </p:dialog>  
