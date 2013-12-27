@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 @SessionScoped
 @Named("usession")
 public class ThemenView implements Serializable {
+
     private static final Logger LOGGER = Logger.getLogger(ThemaShow.class.toString());
     private final static String STARTPAGE = "Startseite";
 
@@ -27,6 +28,9 @@ public class ThemenView implements Serializable {
     private String nutzerName;
     private String thema;
 
+    /**
+     * Initialisiert die Objektvariablen
+     */
     @PostConstruct
     public void init() {
         this.backlog = new Stack<>();
@@ -34,39 +38,68 @@ public class ThemenView implements Serializable {
         this.thema = STARTPAGE;
     }
 
-    public String getNutzerName() {
-        return nutzerName;
-    }
-
-    public void setNutzerName(String nutzerName) {
-        this.nutzerName = nutzerName;
-    }
-
-    public String getThema() {
-        return thema;
-    }
-
-    public void setThema(String thema) {
-        this.thema = thema;
-    }
-
-    public boolean nameVorhanden() {
-        return this.nutzerName.length() > 0;
-    }
-
+    /**
+     * Fuegt eine Seite in den Stack ein, der fuer die zurueck-Funktion verwenden wird
+     * @param page Der Seitennahme (z.B. show.xhtml)
+     */
     public void pushToBacklog(String page) {
         LOGGER.log(Level.SEVERE, "{0} {1} {2}", new Object[]{page, this.thema, this.nutzerName});
         SeitenZustand status = new SeitenZustand(page, this.thema, this.nutzerName);
         this.backlog.push(status);
     }
 
-    public String zurueck() {       
-        if(this.backlog.size() == 1){
+    /**
+     * Liesst den die letzte aufgerufene Seite aus dem Stack und gibt sie zurueck
+     * @return Die letze aufgerufende Seite
+     */
+    public String zurueck() {
+        if (this.backlog.size() == 1) {
             return this.backlog.peek().getPageURL();
         }
-        this.backlog.pop();            
+        this.backlog.pop();
         SeitenZustand status = this.backlog.pop();
         this.thema = status.getThema();
         return status.getPageURL();
+    }
+
+    /**
+     * 
+     * @return Der zuvor festgelegte Name des Nutzers 
+     */
+    public String getNutzerName() {
+        return nutzerName;
+    }
+
+    /**
+     * 
+     * @param nutzerName Der Name des Nutzers, unter dem Beitraege verfasst und 
+     * bearbeitet werden sollen
+     */
+    public void setNutzerName(String nutzerName) {
+        this.nutzerName = nutzerName;
+    }
+
+    /**
+     * 
+     * @return Der Name des aktuell ausgewaehlten Themas
+     */
+    public String getThema() {
+        return thema;
+    }
+
+    /**
+     * 
+     * @param thema Der Name des auszuwaehlenden Themas
+     */
+    public void setThema(String thema) {
+        this.thema = thema;
+    }
+
+    /**
+     * 
+     * @return True, wenn der Name nicht leer ist
+     */
+    public boolean nameVorhanden() {
+        return this.nutzerName.length() > 0;
     }
 }

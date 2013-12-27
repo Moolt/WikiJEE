@@ -19,6 +19,10 @@
     </h:head>
     <h:body>
         <div class="container">
+            <h:form>
+                <h:inputText value="#{search.suchbegriff}" />
+                <h:commandButton value="suchen" action="#{search.suchen()}"/>
+            </h:form>
             <div id="header">
                 <ui:insert name="header">
                     <ui:include src="/templates/commonHeader.xhtml" />

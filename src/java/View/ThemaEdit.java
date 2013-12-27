@@ -31,10 +31,13 @@ public class ThemaEdit implements Serializable {
     private ThemenVerwaltung tv;
     @Inject
     private ThemenView session;
-
     private String bearbeiteterContent;
     private Thema thema;
 
+    /**
+     * Ermittelt das ausgewaehlte Thema und liesst dieses aus Fur die
+     * Zurueck-Funktion wird in der Nutzer Session der Seitenaufruf vermerkt
+     */
     @PostConstruct
     public void init() {
         this.thema = tv.findByName(session.getThema());
@@ -42,20 +45,37 @@ public class ThemaEdit implements Serializable {
         this.session.pushToBacklog(PAGE);
     }
 
-    public String getBearbeiteterContent() {
-        return bearbeiteterContent;
-    }
-
-    public void setBearbeiteterContent(String bearbeiteterContent) {
-        this.bearbeiteterContent = bearbeiteterContent;
-    }
-
+    /**
+     * Speichert eine neue Version eines Temas ab
+     *
+     * @return Verweis zur neu erstellen Seite
+     */
     public String uebernehmen() {
         String name = session.getNutzerName();
         tv.neueVersionSpeichern(thema, bearbeiteterContent, name);
         return SHOW;
     }
 
+    /**
+     * 
+     * @return Der Inhalt einer neu zu erstellenden Version eines Themas
+     */
+    public String getBearbeiteterContent() {
+        return bearbeiteterContent;
+    }
+
+    /**
+     * 
+     * @param bearbeiteterContent Der Inhalt einer neu zu erstellenden Version eines Themas
+     */
+    public void setBearbeiteterContent(String bearbeiteterContent) {
+        this.bearbeiteterContent = bearbeiteterContent;
+    }
+
+    /**
+     * 
+     * @return Der Titel des ausgewaehlten Themas
+     */
     public String getTitel() {
         return thema.getName();
     }
