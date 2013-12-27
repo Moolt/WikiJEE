@@ -28,7 +28,7 @@ public class ThemaSearch implements Serializable {
     @EJB
     private ThemenVerwaltung tv;
     private String suchbegriff;
-    private List<String> ergebnisse;
+    private List<Thema> ergebnisse;
 
     /**
      * Initialisiert die Objektvariablen
@@ -47,18 +47,18 @@ public class ThemaSearch implements Serializable {
      */
     public String suchen() {
         ergebnisse.clear();
-        List<Thema> themen = tv.searchByName(suchbegriff);
+        this.ergebnisse = tv.searchByName(suchbegriff);
 
-        for (Thema t : themen) {
-            String link = "<a href=\"./show.xhtml?thema=" + t.getName()
-                    + "&faces-redirect=true\">" + t.getName() + "</a>";
-            ergebnisse.add(link);
-        }
+//        for (Thema t : themen) {
+//            String link = "<a href=\"./show.xhtml?thema=" + t.getName()
+//                    + "&faces-redirect=true\">" + t.getName() + "</a>";
+//            ergebnisse.add(link);
+//        }
 
         //Es wurde genau 1 Thema gefunden, also kann direkt zum 
         //Artikel verwiesen werden
-        if (themen.size() == 1) {
-            return "./show.xhtml?thema=" + themen.get(0).getName() + "&faces-redirect=true";
+        if (ergebnisse.size() == 1) {
+            return "./show.xhtml?thema=" + ergebnisse.get(0).getName() + "&faces-redirect=true";
         } else {
             return "./search.xhtml";
         }
@@ -81,20 +81,11 @@ public class ThemaSearch implements Serializable {
         this.suchbegriff = suchbegriff;
     }
 
-    /**
-     *
-     * @return Die gefundenen Ergebnisse als Liste von HTML-Links zu den
-     * zugehoerigen Artikeln
-     */
-    public List<String> getErgebnisse() {
+    public List<Thema> getErgebnisse() {
         return ergebnisse;
     }
 
-    /**
-     *
-     * @return Die Anzahl der gefundenen Ergebnisse einer Suche
-     */
-    public int getAnzahlErgebnisse() {
-        return this.ergebnisse.size();
+    public void setErgebnisse(List<Thema> ergebnisse) {
+        this.ergebnisse = ergebnisse;
     }
 }
