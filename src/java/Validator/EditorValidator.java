@@ -8,24 +8,24 @@ package Validator;
 import View.ThemenView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import javax.inject.Inject;
 
 /**
  *
  * @author Moolt
  */
-@FacesValidator("Validator.LinkValidator")
+@FacesValidator("Validator.EditorValidator")
 public class EditorValidator implements Validator {
 
     //eine folge von zeichen und in [ ]-umschlossenen zeichen
     private static final String LINK_PATTERN = "(\\[[^\\[\\]]+\\]|[^\\[\\]])*";
-    @EJB
+    @Inject
     private ThemenView tv;
     private final Pattern pattern;
     private Matcher matcher;

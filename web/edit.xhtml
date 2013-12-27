@@ -35,10 +35,10 @@ and open the template in the editor.
                 <!-- Das Template commonHeader benoetigt eine id=text fuer den Ajax Request -->
                 <h:form id="text"></h:form>
                 <h:form>
-                    <p:editor id="editor" value="#{edit.bearbeiteterContent}" width="600" validator="Validator.NameValidator"/>
+                    <p:editor id="editor" value="#{edit.bearbeiteterContent}" validator="Validator.EditorValidator"/>
                         <h:panelGrid columns="2" style="margin-top:10px" > 
                             <h:panelGroup>   
-                                <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default back"/>  
+                                <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default"/>  
                                 <h:commandButton  value="Übernehmen" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
                             </h:panelGroup>
                         </h:panelGrid>  
