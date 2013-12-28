@@ -34,34 +34,66 @@ public class Thema implements Serializable {
         contentSet = new HashSet<>();
     }
 
+    /**
+     * 
+     * @return Die ID, unter der die Entitaet in der Datenbank gespeichert wird 
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id Die ID, unter der die Entitaet in der Datenbank gespeichert wird 
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return Der Titel des Themas
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * @param name Der Titel des Themas 
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @return Die Menge aller Versionen dieses Themas
+     */
     public Set<Content> getContentSet() {
         return contentSet;
     }
 
+    /**
+     * 
+     * @param contentSet Die Menge aller Versionen dieses Themas
+     */
     public void setContentSet(Set<Content> contentSet) {
         this.contentSet = contentSet;
     }
     
+    /**
+     * Fuegt eine neue Version in die Menge der Versionen ein
+     * @param content Das Content-Objekt der neuen Version
+     */
     public void addContent(Content content){
         this.contentSet.add(content);
     }
     
+    /**
+     * 
+     * @return Die Versionsnummer der aktuellsten Version
+     */
     public int getLatestVersion(){
         int version = -1;
         for(Content v: contentSet){
@@ -72,6 +104,12 @@ public class Thema implements Serializable {
         return version;
     }
     
+    /**
+     * Sucht die Version aus der Menge der Version raus, dessen Versionsnummer
+     * mit der uebergebenen uebereinstimmt
+     * @param version Die Versionsnummer der Version, die gesucht werden soll
+     * @return Die gefundene Version oder null, wenn keine entsprechende Version gefunden wurde
+     */
     public Content getContent(int version){
         for(Content v: contentSet){
             if(v.getVersion() == version){
