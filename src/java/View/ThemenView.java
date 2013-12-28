@@ -27,6 +27,7 @@ public class ThemenView implements Serializable {
     private Stack<SeitenZustand> backlog;
     private String nutzerName;
     private String thema;
+    private int angezeigteVersion;
 
     /**
      * Initialisiert die Objektvariablen
@@ -39,7 +40,9 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * Fuegt eine Seite in den Stack ein, der fuer die zurueck-Funktion verwenden wird
+     * Fuegt eine Seite in den Stack ein, der fuer die zurueck-Funktion
+     * verwenden wird
+     *
      * @param page Der Seitennahme (z.B. show.xhtml)
      */
     public void pushToBacklog(String page) {
@@ -49,7 +52,9 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * Liesst den die letzte aufgerufene Seite aus dem Stack und gibt sie zurueck
+     * Liesst den die letzte aufgerufene Seite aus dem Stack und gibt sie
+     * zurueck
+     *
      * @return Die letze aufgerufende Seite
      */
     public String zurueck() {
@@ -63,16 +68,16 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
-     * @return Der zuvor festgelegte Name des Nutzers 
+     *
+     * @return Der zuvor festgelegte Name des Nutzers
      */
     public String getNutzerName() {
         return nutzerName;
     }
 
     /**
-     * 
-     * @param nutzerName Der Name des Nutzers, unter dem Beitraege verfasst und 
+     *
+     * @param nutzerName Der Name des Nutzers, unter dem Beitraege verfasst und
      * bearbeitet werden sollen
      */
     public void setNutzerName(String nutzerName) {
@@ -80,7 +85,7 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return Der Name des aktuell ausgewaehlten Themas
      */
     public String getThema() {
@@ -88,7 +93,7 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param thema Der Name des auszuwaehlenden Themas
      */
     public void setThema(String thema) {
@@ -96,10 +101,27 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return True, wenn der Name nicht leer ist
      */
     public boolean nameVorhanden() {
         return this.nutzerName.length() > 0;
+    }
+
+    /**
+     *
+     * @return Die Versionsnummer der momentan angezeigten Version eines Themas
+     */
+    public int getAngezeigteVersion() {
+        return angezeigteVersion;
+    }
+
+    /**
+     *
+     * @param angezeigteVersion Die Versionsnummer der momentan angezeigten
+     * Version eines Themas
+     */
+    public void setAngezeigteVersion(int angezeigteVersion) {
+        this.angezeigteVersion = angezeigteVersion;
     }
 }

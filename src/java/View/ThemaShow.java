@@ -34,8 +34,6 @@ public class ThemaShow implements Serializable {
 
     private Thema thema;
     private int aktuelleVersion;
-    private int angezeigteVersion;
-
     
     /**
      * Initialisiert die Objektvariablen
@@ -44,7 +42,7 @@ public class ThemaShow implements Serializable {
     public void init() {
         try {
             thema = tv.findByName(session.getThema());
-            angezeigteVersion = thema.getLatestVersion();
+            session.setAngezeigteVersion(thema.getLatestVersion());
             aktuelleVersion = thema.getLatestVersion();
         } catch (Exception e) {
 
@@ -64,7 +62,7 @@ public class ThemaShow implements Serializable {
      * @return Der Textinhalt der angezeigten Version des ausgewaehlten Themas
      */
     public String getContent() {
-        return thema.getContent(angezeigteVersion).getText();
+        return thema.getContent(session.getAngezeigteVersion()).getText();
     }
 
     /**
@@ -92,23 +90,6 @@ public class ThemaShow implements Serializable {
     }
 
     /**
-     * 
-     * @return Die Versionsnummer der momentan angezeigten Version eines Themas
-     */
-    public int getAngezeigteVersion() {
-        return angezeigteVersion;
-    }
-
-    /**
-     * 
-     * @param angezeigteVersion Die Versionsnummer der momentan angezeigten
-     * Version eines Themas
-     */
-    public void setAngezeigteVersion(int angezeigteVersion) {
-        this.angezeigteVersion = angezeigteVersion;
-    }
-
-    /**
      *
      * @return Der Name des Autors, der die aktuellste Version des angezeigten
      * Themas verfasst hat
@@ -122,7 +103,7 @@ public class ThemaShow implements Serializable {
      * @return Der Name des Autors, dessen Version angezeigt wird
      */
     public String getAngezeigterAutor() {
-        return this.thema.getContent(angezeigteVersion).getAuthor();
+        return this.thema.getContent(session.getAngezeigteVersion()).getAuthor();
     }
 
 }

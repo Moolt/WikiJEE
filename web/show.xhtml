@@ -41,12 +41,12 @@
             
             <div class="footbox">
                 <h:panelGroup id="aversion">
-                    <p>angezeigte version: #{show.angezeigteVersion} von #{show.angezeigterAutor}</p>
+                    <p>angezeigte version: #{usession.angezeigteVersion} von #{show.angezeigterAutor}</p>
                     <p> neuste version: #{show.aktuelleVersion} von #{show.aktuellerAutor} </p> 
                 </h:panelGroup>
             
                 <h:form id="text">
-                    <h:inputText id="vinput" value="#{show.angezeigteVersion}" required="true" styleClass="form-control">								
+                    <h:inputText id="vinput" value="#{usession.angezeigteVersion}" required="true" styleClass="form-control">								
                         <f:validateLongRange minimum="0" maximum="#{show.aktuelleVersion}"/>
                         <f:ajax event="keyup" execute="@form" render=":thema"/>
                         <f:ajax event="keyup" execute="@form" render=":aversion"/>
