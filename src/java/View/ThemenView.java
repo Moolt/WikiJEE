@@ -25,6 +25,7 @@ public class ThemenView implements Serializable {
     private final static String STARTPAGE = "Startseite";
 
     private Stack<SeitenZustand> backlog;
+    private Stack<SeitenZustand> forward;
     private String nutzerName;
     private String thema;
     private int angezeigteVersion;
@@ -35,6 +36,7 @@ public class ThemenView implements Serializable {
     @PostConstruct
     public void init() {
         this.backlog = new Stack<>();
+        this.forward = new Stack<>();
         this.nutzerName = "";
         this.thema = STARTPAGE;
     }
@@ -60,9 +62,19 @@ public class ThemenView implements Serializable {
     public String zurueck() {
         if (this.backlog.size() == 1) {
             return this.backlog.peek().getPageURL();
-        }
+        }        
+        //Das letzte Element muss entfernt werden, 
+        //da es sich hier um die aktuelle Seite handelt
         this.backlog.pop();
         SeitenZustand status = this.backlog.pop();
+        this.forward.push(status);
+        this.thema = status.getThema();
+        return status.getPageURL();
+    }
+    
+    public String vorwaerts(){
+        SeitenZustand status = this.forward.pop();
+        this.thema = status.getThema();
         this.thema = status.getThema();
         return status.getPageURL();
     }
