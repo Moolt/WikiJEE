@@ -41,7 +41,7 @@ public class ThemaEdit implements Serializable {
     @PostConstruct
     public void init() {
         this.thema = tv.findByName(session.getThema());
-        this.bearbeiteterContent = thema.getContent(thema.getLatestVersion()).getText();
+        this.bearbeiteterContent = thema.getContent(session.getAngezeigteVersion()).getText();
     }
 
     /**

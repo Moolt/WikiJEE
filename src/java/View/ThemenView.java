@@ -25,8 +25,10 @@ public class ThemenView implements Serializable {
     private final static String STARTPAGE = "Startseite";
 
     private Stack<SeitenZustand> backlog;
+    private Stack<SeitenZustand> forward;
     private String nutzerName;
     private String thema;
+    private int angezeigteVersion;
 
     /**
      * Initialisiert die Objektvariablen
@@ -34,12 +36,15 @@ public class ThemenView implements Serializable {
     @PostConstruct
     public void init() {
         this.backlog = new Stack<>();
+        this.forward = new Stack<>();
         this.nutzerName = "";
         this.thema = STARTPAGE;
     }
 
     /**
-     * Fuegt eine Seite in den Stack ein, der fuer die zurueck-Funktion verwenden wird
+     * Fuegt eine Seite in den Stack ein, der fuer die zurueck-Funktion
+     * verwenden wird
+     *
      * @param page Der Seitennahme (z.B. show.xhtml)
      */
     public void pushToBacklog(String page) {
@@ -49,30 +54,42 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * Liesst den die letzte aufgerufene Seite aus dem Stack und gibt sie zurueck
+     * Liesst den die letzte aufgerufene Seite aus dem Stack und gibt sie
+     * zurueck
+     *
      * @return Die letze aufgerufende Seite
      */
     public String zurueck() {
         if (this.backlog.size() == 1) {
             return this.backlog.peek().getPageURL();
-        }
+        }        
+        //Das letzte Element muss entfernt werden, 
+        //da es sich hier um die aktuelle Seite handelt
         this.backlog.pop();
         SeitenZustand status = this.backlog.pop();
+        this.forward.push(status);
+        this.thema = status.getThema();
+        return status.getPageURL();
+    }
+    
+    public String vorwaerts(){
+        SeitenZustand status = this.forward.pop();
+        this.thema = status.getThema();
         this.thema = status.getThema();
         return status.getPageURL();
     }
 
     /**
-     * 
-     * @return Der zuvor festgelegte Name des Nutzers 
+     *
+     * @return Der zuvor festgelegte Name des Nutzers
      */
     public String getNutzerName() {
         return nutzerName;
     }
 
     /**
-     * 
-     * @param nutzerName Der Name des Nutzers, unter dem Beitraege verfasst und 
+     *
+     * @param nutzerName Der Name des Nutzers, unter dem Beitraege verfasst und
      * bearbeitet werden sollen
      */
     public void setNutzerName(String nutzerName) {
@@ -80,7 +97,7 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return Der Name des aktuell ausgewaehlten Themas
      */
     public String getThema() {
@@ -88,7 +105,7 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param thema Der Name des auszuwaehlenden Themas
      */
     public void setThema(String thema) {
@@ -96,10 +113,27 @@ public class ThemenView implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return True, wenn der Name nicht leer ist
      */
     public boolean nameVorhanden() {
         return this.nutzerName.length() > 0;
+    }
+
+    /**
+     *
+     * @return Die Versionsnummer der momentan angezeigten Version eines Themas
+     */
+    public int getAngezeigteVersion() {
+        return angezeigteVersion;
+    }
+
+    /**
+     *
+     * @param angezeigteVersion Die Versionsnummer der momentan angezeigten
+     * Version eines Themas
+     */
+    public void setAngezeigteVersion(int angezeigteVersion) {
+        this.angezeigteVersion = angezeigteVersion;
     }
 }

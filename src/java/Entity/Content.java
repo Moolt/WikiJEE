@@ -29,34 +29,66 @@ public class Content implements Serializable {
     public Content() {
     }
 
+    /**
+     *
+     * @return Die ID, unter der die Entitaet in der Datenbank gespeichert wird 
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id Die ID, unter der die Entitaet in der Datenbank gespeichert wird 
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return Der Textinhalt dieser Version
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * 
+     * @param text Der Textinhalt dieser Version
+     */
     public void setText(String text) {
         this.text = text;
     }
 
+    /**
+     * 
+     * @return Die Versionsnummer der Version
+     */
     public int getVersion() {
         return version;
     }
 
+    /**
+     * 
+     * @param version Die Versionsnummer der Version
+     */
     public void setVersion(int version) {
         this.version = version;
     }
 
+    /**
+     * 
+     * @return Der Name des Autors dieser Version
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * 
+     * @param author Der Name des Autors dieser Version
+     */
     public void setAuthor(String author) {
         this.author = author;
     }

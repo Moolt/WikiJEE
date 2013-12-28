@@ -81,14 +81,26 @@ public class ThemaSearch implements Serializable {
         this.suchbegriff = suchbegriff;
     }
 
+    /**
+     * 
+     * @return Das Ergebnis einer Suchoperation als Liste von Themen
+     */
     public List<Thema> getErgebnisse() {
         return ergebnisse;
     }
 
+    /**
+     * 
+     * @param ergebnisse Das Ergebnis einer Suchoperation als Liste von Themen
+     */
     public void setErgebnisse(List<Thema> ergebnisse) {
         this.ergebnisse = ergebnisse;
     }
     
+    /**
+     * 
+     * @return Die Anzahl von gefundenen Ergebnissen einer Suche
+     */
     public int getAnzahlErgebnisse() {
         return this.ergebnisse.size();
     }

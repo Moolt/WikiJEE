@@ -34,6 +34,17 @@ public class EditorValidator implements Validator {
         pattern = Pattern.compile(LINK_PATTERN);
     }
 
+    /**
+     * Validiert den eingegebenen Text auf die Einhaltung der Klammer-Regeln
+     * Klammern duerfen nicht [[verschachtelt]] sein und muessen immer [geoeffnet 
+     * und wieder geschlossen] werden. Desweiteren dueften Klammern nicht leer [] sein
+     * Es wird ebenfalls ueberprueft, ob ein Nutzername eingegeben wurde, da ein Autor
+     * erforderlich ist
+     * @param context 
+     * @param component
+     * @param value Der zu validierende Text
+     * @throws ValidatorException 
+     */
     @Override
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {

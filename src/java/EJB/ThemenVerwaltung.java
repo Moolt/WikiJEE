@@ -76,14 +76,26 @@ public class ThemenVerwaltung implements Serializable {
         return em.createQuery("SELECT t FROM Thema t WHERE t.name=\"" + name + "\"", Thema.class).getResultList().size() > 0;
     }
 
-    public void refresh(Object o) {
-        em.refresh(o);
-    }
-
+    /**
+     * Sucht Themen aus der Datenbank, dessen Name den Suchbegriff enthaelt oder
+     * diesem entspricht
+     *
+     * @param suchbegriff Der Suchbegriff mit dem die Suche durchgefuehrt wird
+     * @return Die Liste der gefundenen Themen
+     */
     public List<Thema> searchByName(String suchbegriff) {
         return em.createQuery("SELECT t FROM Thema t WHERE t.name LIKE \"%" + suchbegriff + "%\"", Thema.class).getResultList();
     }
 
+    /**
+     * Speichert eine neue Version eines Themas in der Datenbank Die Themen, die
+     * in der neuen Version in [Klammern] genannt werden, werden ebenfalls
+     * angelegt
+     *
+     * @param thema Das Thema, dessen neue Version gespeichert werden soll
+     * @param neuerContent Der Textinhalt der neuen Version
+     * @param nutzerName Der Name des Autors
+     */
     public void neueVersionSpeichern(Thema thema, String neuerContent, String nutzerName) {
         this.erstelleNeueThemen(neuerContent);
         Content neueVersion = new Content();
@@ -94,6 +106,13 @@ public class ThemenVerwaltung implements Serializable {
         this.update(thema);
     }
 
+    /**
+     * Sucht aus einem Text alle Schlagwoerter in [Klammern] Fuer die gefundenen
+     * Schlagwoerter werden in der Datenbank neue Themen angelegt, wenn sie noch
+     * nich vorhanden sind
+     *
+     * @param str Der Textinhalt eines Themas
+     */
     private void erstelleNeueThemen(String str) {
         Matcher m = Pattern.compile("\\[([^\\[\\]<]*)\\]").matcher(str);
         while (m.find()) {

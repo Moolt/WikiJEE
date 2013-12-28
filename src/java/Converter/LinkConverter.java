@@ -5,7 +5,6 @@
  */
 package Converter;
 
-import java.util.regex.Pattern;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
