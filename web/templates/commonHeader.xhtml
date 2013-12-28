@@ -13,14 +13,15 @@ and open the template in the editor.
         <ui:composition>
             <div class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./faces/show.xhtml">Weni Widi Wiki</a>	  
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
-                    <h:button value="Zurück" onclick="#{usession.zurueck()}" styleClass="btn btn-default bbutton"/>
+                    <a class="navbar-brand" href="./show.xhtml?thema=Startseite">Weni Widi Wiki</a>	  
+                    <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button-->
                 </div>
                 <h:form id="name" styleClass="navbar-form navbar-left">
-                        <h:inputText value="#{usession.nutzerName}" styleClass="form-control" pt:placeholder="Nutzername">
-                            <f:ajax event="keyup" execute="@form" render=":text"/>
-                        </h:inputText>
+                     <h:inputText value="#{usession.nutzerName}" styleClass="form-control nutzer" pt:placeholder="Nutzername">
+                        <f:ajax event="keyup" execute="@form" render=":text"/>
+                   </h:inputText>
+                        
+                   
                 </h:form>
                 
                 <div class="navbar-collapse collapse">
@@ -30,6 +31,20 @@ and open the template in the editor.
 			</div>
                         <h:commandButton value="Search" action="#{search.suchen()}" styleClass="btn btn-default"/>
                     </h:form>              
+                </div>
+            </div>
+            <div class="navbar navbar-default navleiste" role="navigation">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h:form>
+                            <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left"/>  
+                        </h:form>
+                    </div>
+                    <div class="col-md-4">
+                        <h:form>
+                            <h:commandButton value="Vorwärts" action="#{usession.zurueck()}" styleClass="btn btn-default pull-right"/>  
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </ui:composition>

@@ -44,7 +44,7 @@ public class ThemenView implements Serializable {
      */
     public void pushToBacklog(String page) {
         LOGGER.log(Level.SEVERE, "{0} {1} {2}", new Object[]{page, this.thema, this.nutzerName});
-        SeitenZustand status = new SeitenZustand(page, this.thema);
+        SeitenZustand status = new SeitenZustand(page+"?faces-redirect=true", this.thema);
         this.backlog.push(status);
     }
 

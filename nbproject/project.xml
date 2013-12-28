@@ -15,6 +15,10 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.selenium-java-2.39.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.lib-libs}</file>
                     <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
@@ -22,6 +26,7 @@
             <web-module-additional-libraries/>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.Test%20Packages.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

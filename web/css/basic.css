@@ -24,8 +24,23 @@ p{
     margin-bot:1px;
 }
 
+.col-md-4 .pull-right{
+    margin-right:0px;
+}
+
+.navleiste{
+    margin-top:-10px;
+    padding-top:-10px;
+    min-height: 33px!important;
+}
+
 .bbutton{
-    margin-top:8px;
+    margin-left:150px;
+    margin-top:-70px;
+}
+
+.nutzer{
+    margin-left:90px;
 }
 
 .ui-editor, .ui-widget-content{
