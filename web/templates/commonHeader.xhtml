@@ -29,7 +29,7 @@ and open the template in the editor.
 			<div class="form-group">
                             <h:inputText value="#{search.suchbegriff}" styleClass="form-control" pt:placeholder="Search"/>
 			</div>
-                        <h:commandButton value="Search" action="#{search.suchen()}" styleClass="btn btn-default"/>
+                        <h:commandButton value="Search" id="searchBtn" action="#{search.suchen()}" styleClass="btn btn-default"/>
                     </h:form>              
                 </div>
             </div>
@@ -37,7 +37,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-md-8">
                         <h:form>
-                            <h:commandButton value="Zurück" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left"/>  
+                            <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left"/>  
                         </h:form>
                     </div>
                     <div class="col-md-4">
