@@ -1,16 +1,12 @@
 package xhtml;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 /*
@@ -20,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class XhtmlClassTest {
     private WebDriver driver;
-    private static String text;
+    private static String tmp;
     
     /**
      * Setup wird vor jedem Test ausgefuehrt. Es wir der driver fuer Firefox angelegt.
@@ -41,15 +37,21 @@ public class XhtmlClassTest {
     
     @After
     public void tearDown(){   
-        driver.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
-        if(driver.findElement(By.tagName("body")).getText().contains("Dies ist ein")){
-            nutzernameEingeben("Michael");
-            eingabeEdit();
-            driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-            driver.findElement(By.xpath("html/body")).sendKeys(Keys.CONTROL + "a");
-            driver.findElement(By.xpath("html/body")).sendKeys(text);
+        WebDriver clean = new FirefoxDriver();
+        clean.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
+        if(clean.findElement(By.tagName("body")).getText().contains("Dies ist ein")){
+            clean.findElement(By.name("name:nutzerName")).clear();
+            clean.findElement(By.name("name:nutzerName")).sendKeys("Michael");
+            clean.findElement(By.name("text:editBtn")).click();
+            clean.switchTo().frame(clean.findElement(By.tagName("iframe")));
+            clean.findElement(By.xpath("html/body")).sendKeys(Keys.CONTROL + "a");
+            clean.findElement(By.xpath("html/body")).sendKeys(tmp);
+            clean.switchTo().defaultContent();
+            clean.findElement(By.name("editForm:submitBtn")).click();
+            
             
         }
+        clean.quit();
         driver.quit();
         System.out.println("\n##########################################################");
     }
@@ -133,7 +135,7 @@ public class XhtmlClassTest {
     
     private void editTextEingeben(String text){
         driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-        text=driver.findElement(By.xpath("html/body")).getText();
+        tmp=driver.findElement(By.xpath("html/body")).getText();
         driver.findElement(By.xpath("html/body")).sendKeys(Keys.CONTROL + "a");
         driver.findElement(By.xpath("html/body")).sendKeys(text);
     }
@@ -185,7 +187,7 @@ public class XhtmlClassTest {
      * 
      */ 
     private void artikelErfolglosEditieren(String name, String text){
-         nutzernameEingeben(name);
+        nutzernameEingeben(name);
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.elementToBeClickable(By.name("text:editBtn")));
         eingabeEdit();

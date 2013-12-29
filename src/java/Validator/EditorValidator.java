@@ -56,9 +56,14 @@ public class EditorValidator implements Validator {
             throw new ValidatorException(msg);
         }
         if (!tv.nameVorhanden()) {
-            FacesMessage msg = new FacesMessage("Kein Name eingegeben.", "Beitrag wurde nicht editiert.");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(msg);
+            FacesMessage fm = new FacesMessage("Kein Name eingegeben.", "Beitrag wurde nicht editiert.");
+            fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+            //context.addMessage(null, fm);
+            throw new ValidatorException(fm);
+            
+            //FacesMessage msg = new FacesMessage("Kein Name eingegeben.", "Beitrag wurde nicht editiert.");
+            //msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            //throw new ValidatorException(msg);
         }
     }
 

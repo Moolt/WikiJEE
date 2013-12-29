@@ -16,6 +16,20 @@ and open the template in the editor.
                     <a class="navbar-brand" href="./show.xhtml?thema=Startseite">Weni Widi Wiki</a>	  
                     <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button-->
                 </div>
+                <div class="navbar-header">
+                    <ul class="nav nav-pills">
+                        <a href="./index.xhtml" class="startseite">
+                            <li>
+                                <button type="button" class="btn btn-default home" href="./faces/show.xhtml">
+                                  <span class="glyphicon glyphicon-home"></span> Zur Indexseite
+                                </button>
+
+                            </li>
+                          </a>   
+                    </ul>
+
+                          <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button-->
+                </div>
                 <h:form id="name" styleClass="navbar-form navbar-left">
                      <h:inputText id="nutzerName" value="#{usession.nutzerName}" styleClass="form-control nutzer" pt:placeholder="Nutzername">
                         <f:ajax event="keyup" execute="@form" render=":text"/>
@@ -25,7 +39,7 @@ and open the template in the editor.
                 </h:form>
                 
                 <div class="navbar-collapse collapse">
-                    <h:form styleClass="navbar-form navbar-right" id="searchForm">
+                    <h:form styleClass="navbar-form navbar-right pull-right" id="searchForm">
 			<div class="form-group">
                             <h:inputText value="#{search.suchbegriff}" id="searchInput" styleClass="form-control" pt:placeholder="Search"/>
 			</div>

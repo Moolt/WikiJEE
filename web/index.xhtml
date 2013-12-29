@@ -12,28 +12,73 @@ and open the template in the editor.
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         #{usession.pushToBacklog("./index.xhtml")}
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width"/>
+        <title>Weni Widi Wiki</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
+        <link type="text/css" rel="stylesheet" href="css/basic.css" />
+        <meta name="viewport" content="width=device-width"/> 
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton value="Aktualisieren" accesskey="#{index.aktualisieren()}"/>
-            <h:inputText value="#{index.anzahl}">
-                <f:ajax event="keyup" execute="@form" render=":liste"/>
-            </h:inputText>
-        </h:form>
-        <a href="./faces/show.xhtml">Zum Wiki</a>
-        (und ja, der link macht einen sinn)
-        <br/>
-        <h:panelGroup id="liste">
-            <ui:repeat value="#{index.aktuellsteThemen}" var="thema">
-                <h:link value="#{thema.name}" outcome="./show.xhtml">
-                    <f:param name="thema" value="#{thema.name}" />
-                </h:link>
-                Zuletzt geändert am: #{thema.letzteAenderungAsString} von #{thema.getContent(thema.latestVersion).getAuthor()}, 
-                Neuste Version: #{thema.latestVersion}
-                <br/>
-            </ui:repeat>
-        </h:panelGroup>
+        <div class="container">
+            <div class="navbarheader">
+                <ul class="nav nav-pills pull-right">
+                  <a href="./faces/show.xhtml" class="startseite">
+                    <li>
+                        <button type="button" class="btn btn-info btn-lg" href="./faces/show.xhtml">
+                          <span class="glyphicon glyphicon-play"></span> Zur Startseite
+                        </button>
+                     
+                    </li>
+                  </a>   
+                </ul>
+                <h3 class="text-muted revback">Weni Widi Wiki</h3>
+              </div>
+            <br/>  
+            <div class="jumbotron">
+                    <h1>IndexSeite</h1><br />
+                    <h:form>
+                        <h:commandButton value="Aktualisieren" class="btn btn-default back" accesskey="#{index.aktualisieren()}"/>
+                        <h:inputText value="#{index.anzahl}">
+                            <f:ajax event="keyup" execute="@form" render=":liste"/>
+                        </h:inputText>
+                         Die * aktuellsten Artikel:
+                    </h:form><br />
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Topic-Name</th>
+                                    <th>Zuletzt geändert am</th>
+                                    <th>Zuletzt geändert von</th>
+                                    <th>Neuste Version</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <h:panelGroup id="liste">
+                                    <ui:repeat value="#{index.aktuellsteThemen}" var="thema" varStatus="status">
+                                        <tr>
+                                            <td>#{status.index}</td>  
+                                            <td>
+                                                <h:link value="#{thema.name}" outcome="./show.xhtml">
+                                                    <f:param name="thema" value="#{thema.name}" />
+                                                </h:link>
+                                            </td>
+                                            <td>
+                                                #{thema.letzteAenderungAsString}
+                                            </td>
+                                            <td>
+                                                #{thema.getContent(thema.latestVersion).getAuthor()}
+                                            </td>
+                                            <td>
+                                                #{thema.latestVersion}
+                                            </td> 
+                                        </tr>
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </tbody>
+                        </table>
+                    <br />
+                </div>
+        </div>
     </h:body>
 </html>

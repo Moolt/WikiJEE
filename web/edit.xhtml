@@ -9,7 +9,8 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     
     <f:metadata>
         <f:viewParam name="thema" value="#{usession.thema}" />
@@ -50,7 +51,10 @@ and open the template in the editor.
                         <h:outputText id="display" value="#{edit.bearbeiteterContent}" escape="false" />  
                      </p:dialog>  
                 </h:form>
-                
+                <ui:repeat value="#{facesContext.messageList}" var="facesMessage" varStatus="stat">
+                    <br /><p style="color:red;">Fehler #{facesMessage.summary}</p>
+                    <p style="color:red;">Auswirkung: #{facesMessage.detail}</p>
+                </ui:repeat>
              </div>
 
             
