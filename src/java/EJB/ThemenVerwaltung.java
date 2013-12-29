@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package EJB;
 
 import Entity.Content;
@@ -15,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ * Zentrale Verwaltungsklasse fuer Datenbank-Operationen
  *
  * @author Moolt
  */
@@ -103,6 +100,8 @@ public class ThemenVerwaltung implements Serializable {
         neueVersion.setVersion(thema.getLatestVersion() + 1);
         neueVersion.setText(neuerContent);
         thema.addContent(neueVersion);
+        //letzte aenderung wird auf die aktuelle unix-zeit festgelegt
+        thema.setLetzteAenderung(this.getUnixTimestamp());
         this.update(thema);
     }
 
@@ -119,6 +118,7 @@ public class ThemenVerwaltung implements Serializable {
             String gefundenesThema = m.group(1);
             if (!this.themaExists(gefundenesThema)) {
                 Thema neuesThema = new Thema();
+                neuesThema.setLetzteAenderung(this.getUnixTimestamp());
                 Content neuerContent = new Content();
                 neuesThema.setName(gefundenesThema);
                 neuerContent.setVersion(0);
@@ -128,5 +128,17 @@ public class ThemenVerwaltung implements Serializable {
                 this.persist(neuesThema);
             }
         }
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public List<Thema> getAktuellsteThemen(int anzahl) {
+        return em.createQuery("SELECT t FROM Thema t ORDER BY t.letzteAenderung DESC", Thema.class).setMaxResults(anzahl).getResultList();
+    }
+
+    private long getUnixTimestamp() {
+        return System.currentTimeMillis() / 1000L;
     }
 }

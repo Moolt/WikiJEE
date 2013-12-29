@@ -6,15 +6,34 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
         #{usession.pushToBacklog("./index.xhtml")}
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width"/>
-        
-    </head>
-    <body>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="Aktualisieren" accesskey="#{index.aktualisieren()}"/>
+            <h:inputText value="#{index.anzahl}">
+                <f:ajax event="keyup" execute="@form" render=":liste"/>
+            </h:inputText>
+        </h:form>
         <a href="./faces/show.xhtml">Zum Wiki</a>
         (und ja, der link macht einen sinn)
-    </body>
+        <br/>
+        <h:panelGroup id="liste">
+            <ui:repeat value="#{index.aktuellsteThemen}" var="thema">
+                <h:link value="#{thema.name}" outcome="./show.xhtml">
+                    <f:param name="thema" value="#{thema.name}" />
+                </h:link>
+                Zuletzt geändert am: #{thema.letzteAenderungAsString} von #{thema.getContent(thema.latestVersion).getAuthor()}, 
+                Neuste Version: #{thema.latestVersion}
+                <br/>
+            </ui:repeat>
+        </h:panelGroup>
+    </h:body>
 </html>

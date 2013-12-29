@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import EJB.ThemenVerwaltung;
@@ -11,12 +6,14 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import Entity.Thema;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- *
+ * 
  * @author Moolt
  */
 @RequestScoped
@@ -68,7 +65,9 @@ public class ThemaEdit implements Serializable {
      * @param bearbeiteterContent Der Inhalt einer neu zu erstellenden Version eines Themas
      */
     public void setBearbeiteterContent(String bearbeiteterContent) {
-        this.bearbeiteterContent = bearbeiteterContent;
+
+            this.bearbeiteterContent = bearbeiteterContent;
+   
     }
 
     /**

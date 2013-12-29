@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Pojo.SeitenZustand;
@@ -25,7 +21,6 @@ public class ThemenView implements Serializable {
     private final static String STARTPAGE = "Startseite";
 
     private Stack<SeitenZustand> backlog;
-    private Stack<SeitenZustand> forward;
     private String nutzerName;
     private String thema;
     private int angezeigteVersion;
@@ -36,7 +31,6 @@ public class ThemenView implements Serializable {
     @PostConstruct
     public void init() {
         this.backlog = new Stack<>();
-        this.forward = new Stack<>();
         this.nutzerName = "";
         this.thema = STARTPAGE;
     }
@@ -49,7 +43,7 @@ public class ThemenView implements Serializable {
      */
     public void pushToBacklog(String page) {
         LOGGER.log(Level.SEVERE, "{0} {1} {2}", new Object[]{page, this.thema, this.nutzerName});
-        SeitenZustand status = new SeitenZustand(page+"?faces-redirect=true", this.thema);
+        SeitenZustand status = new SeitenZustand(page + "?faces-redirect=true", this.thema);
         this.backlog.push(status);
     }
 
@@ -62,19 +56,11 @@ public class ThemenView implements Serializable {
     public String zurueck() {
         if (this.backlog.size() == 1) {
             return this.backlog.peek().getPageURL();
-        }        
+        }
         //Das letzte Element muss entfernt werden, 
         //da es sich hier um die aktuelle Seite handelt
         this.backlog.pop();
         SeitenZustand status = this.backlog.pop();
-        this.forward.push(status);
-        this.thema = status.getThema();
-        return status.getPageURL();
-    }
-    
-    public String vorwaerts(){
-        SeitenZustand status = this.forward.pop();
-        this.thema = status.getThema();
         this.thema = status.getThema();
         return status.getPageURL();
     }

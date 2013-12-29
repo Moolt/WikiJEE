@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import EJB.ThemenVerwaltung;
@@ -25,6 +20,10 @@ import javax.inject.Named;
 public class ThemaSearch implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(ThemaShow.class.toString());
+    private final static String PAGE = "./search.xhtml";
+    private final static String EDIT = "./edit.xhtml";
+    private final static String SHOW = "./show.xhtml";
+
     @EJB
     private ThemenVerwaltung tv;
     private String suchbegriff;
@@ -54,18 +53,17 @@ public class ThemaSearch implements Serializable {
 //                    + "&faces-redirect=true\">" + t.getName() + "</a>";
 //            ergebnisse.add(link);
 //        }
-
         //Es wurde genau 1 Thema gefunden, also kann direkt zum 
         //Artikel verwiesen werden
         if (ergebnisse.size() == 1) {
-            return "./show.xhtml?thema=" + ergebnisse.get(0).getName() + "&faces-redirect=true";
+            return SHOW + "?thema=" + ergebnisse.get(0).getName() + "&faces-redirect=true";
         } else {
-            return "./search.xhtml";
+            return PAGE;
         }
     }
 
     /**
-     * 
+     *
      * @return Der Suchbegriff des Suchvorgangs
      */
     public String getSuchbegriff() {
@@ -82,7 +80,7 @@ public class ThemaSearch implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return Das Ergebnis einer Suchoperation als Liste von Themen
      */
     public List<Thema> getErgebnisse() {
@@ -90,15 +88,15 @@ public class ThemaSearch implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param ergebnisse Das Ergebnis einer Suchoperation als Liste von Themen
      */
     public void setErgebnisse(List<Thema> ergebnisse) {
         this.ergebnisse = ergebnisse;
     }
-    
+
     /**
-     * 
+     *
      * @return Die Anzahl von gefundenen Ergebnissen einer Suche
      */
     public int getAnzahlErgebnisse() {
