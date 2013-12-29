@@ -64,11 +64,13 @@ and open the template in the editor.
                         </tbody>
                     </table>
                 </c:if>
-
                 <c:if test="#{search.anzahlErgebnisse == 0}">
                     Es wurden keine Artikel gefunden.
                 </c:if>
-
+                <br />
+                <h:form>
+                    <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left"/>
+                </h:form>
             </div>
         </div>
     </h:body>

@@ -34,16 +34,19 @@ and open the template in the editor.
                 <h1>#{edit.titel}</h1>
                 <!-- Das Template commonHeader benoetigt eine id=text fuer den Ajax Request -->
                 <h:form id="text"></h:form>
-                <h:form>
-                    <p:editor id="editor" value="#{edit.bearbeiteterContent}" validator="Validator.EditorValidator"/>
-                        <h:panelGrid columns="2" style="margin-top:10px" > 
+                <h:form id="editForm">
+                    <f:view encoding="UTF-8">
+                        <p:editor id="editor" value="#{edit.bearbeiteterContent}" validator="Validator.EditorValidator"/>
+                    </f:view>
+                        <h:panelGrid id="pgrid" columns="2" style="margin-top:10px" > 
                             <h:panelGroup>   
-                                
+                                <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left pull"/>
                                 <h:commandButton  value="Übernehmen" id="submitBtn" action="#{edit.uebernehmen()}" styleClass="btn btn-default"/>            
+                                <p:commandButton id="clearButton" styleClass="clearBtn" type="button" value="Clear" onclick="PF('editor').clear()" icon="ui-icon-close" />
                             </h:panelGroup>
                         </h:panelGrid>  
 
-                     <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
+                     <p:dialog id ="dia" header="Content" showEffect="fade" >  
                         <h:outputText id="display" value="#{edit.bearbeiteterContent}" escape="false" />  
                      </p:dialog>  
                 </h:form>
