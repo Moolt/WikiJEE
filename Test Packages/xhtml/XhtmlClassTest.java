@@ -39,10 +39,14 @@ public class XhtmlClassTest {
     public void tearDown(){   
         WebDriver clean = new FirefoxDriver();
         clean.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
+        WebDriverWait wait = new WebDriverWait(clean, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
         if(clean.findElement(By.tagName("body")).getText().contains("Dies ist ein")){
             clean.findElement(By.name("name:nutzerName")).clear();
             clean.findElement(By.name("name:nutzerName")).sendKeys("Michael");
+            wait.until(ExpectedConditions.elementToBeClickable(By.name("text:editBtn")));
             clean.findElement(By.name("text:editBtn")).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("iframe")));
             clean.switchTo().frame(clean.findElement(By.tagName("iframe")));
             clean.findElement(By.xpath("html/body")).sendKeys(Keys.CONTROL + "a");
             clean.findElement(By.xpath("html/body")).sendKeys(tmp);
@@ -318,6 +322,8 @@ public class XhtmlClassTest {
         feldFuellen("searchForm:searchInput", "Datenbank");
         eingabeSuche();
         eingabeZurueck();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Entity"));
     }
 
@@ -334,6 +340,8 @@ public class XhtmlClassTest {
         eingabeSuche();
         eingabeZurueck();
         eingabeZurueck();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Startseite"));     
     }
 
