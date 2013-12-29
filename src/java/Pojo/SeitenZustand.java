@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Pojo;
 
 /**
- *
+ * Speichert den Zustand einer Seite, sodass dieser spaeter ueber einen Zurueck-Button 
+ * wiederhergestellt werden kann
  * @author Moolt
  */
 public class SeitenZustand {
@@ -15,7 +11,7 @@ public class SeitenZustand {
     private String thema;
 
     /**
-     * 
+     *
      * @param pageURL Eine relative Seiten-URL
      * @param thema Ein Name eines Wiki-Themas
      */
@@ -25,7 +21,7 @@ public class SeitenZustand {
     }
 
     /**
-     * 
+     *
      * @return Eine relative Seiten-URL
      */
     public String getPageURL() {
@@ -33,7 +29,7 @@ public class SeitenZustand {
     }
 
     /**
-     * 
+     *
      * @param pageURL Eine relative Seiten-URL
      */
     public void setPageURL(String pageURL) {
@@ -41,7 +37,7 @@ public class SeitenZustand {
     }
 
     /**
-     * 
+     *
      * @return Ein Name eines Wiki-Themas
      */
     public String getThema() {
@@ -49,7 +45,7 @@ public class SeitenZustand {
     }
 
     /**
-     * 
+     *
      * @param thema Ein Name eines Wiki-Themas
      */
     public void setThema(String thema) {

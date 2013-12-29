@@ -1,6 +1,8 @@
 package Entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -11,12 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
+ * Daten-Objekt das ein Themas (Wiki-Eintrag) mit Versionen repraesentiert
  * @author Moolt
  */
 @Entity
@@ -29,6 +27,7 @@ public class Thema implements Serializable {
     private String name;
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Content> contentSet;
+    private long letzteAenderung;
 
     public Thema() {
         contentSet = new HashSet<>();
@@ -117,5 +116,31 @@ public class Thema implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * 
+     * @return Das Datum der letzten Aenderung des Themas als Unix-Timestamp
+     */
+    public long getLetzteAenderung() {
+        return letzteAenderung;
+    }
+
+    /**
+     * 
+     * @param letzteAenderung Das Datum der letzten Aenderung des Themas als Unix-Timestamp
+     */
+    public void setLetzteAenderung(long letzteAenderung) {
+        this.letzteAenderung = letzteAenderung;
+    } 
+    
+    /**
+     * Formatiert das letzte Aenderungsdatum zu einem String
+     * @return 
+     */
+    public String getLetzteAenderungAsString(){
+        Date datum = new Date((long)letzteAenderung*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'um' HH:mm:ss");
+        return sdf.format(datum);
     }
 }
