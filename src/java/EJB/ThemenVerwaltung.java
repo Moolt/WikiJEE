@@ -132,12 +132,16 @@ public class ThemenVerwaltung implements Serializable {
 
     /**
      * 
-     * @return 
+     * @return Eine Liste der aktuellsten Themen
      */
     public List<Thema> getAktuellsteThemen(int anzahl) {
         return em.createQuery("SELECT t FROM Thema t ORDER BY t.letzteAenderung DESC", Thema.class).setMaxResults(anzahl).getResultList();
     }
 
+    /**
+     * 
+     * @return Die aktuelle Zeit als Unix-Timestamp
+     */
     private long getUnixTimestamp() {
         return System.currentTimeMillis() / 1000L;
     }
