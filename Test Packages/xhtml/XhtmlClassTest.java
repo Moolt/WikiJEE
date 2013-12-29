@@ -27,7 +27,7 @@ public class XhtmlClassTest {
     @Before
     public void setUp(){
         driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
+        driver.get("http://localhost:8080/WikiJEE/show.xhtml");
     }
  
     /**
@@ -38,7 +38,7 @@ public class XhtmlClassTest {
     @After
     public void tearDown(){   
         WebDriver clean = new FirefoxDriver();
-        clean.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
+        clean.get("http://localhost:8080/WikiJEE/show.xhtml");
         WebDriverWait wait = new WebDriverWait(clean, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
         if(clean.findElement(By.tagName("body")).getText().contains("Dies ist ein")){
