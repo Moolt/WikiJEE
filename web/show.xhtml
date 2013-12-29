@@ -50,9 +50,9 @@
                     </div>
 
                     <br/>
-
-                    <h:commandButton rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}" styleClass="btn btn-default"/> 
-                    <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default pull-left"/>             
+                    <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default"/>  
+                    <h:commandButton id="editBtn" rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}" styleClass="btn btn-default"/> 
+                               
                 </h:form>
             </div>
             <div class="jumbotron">

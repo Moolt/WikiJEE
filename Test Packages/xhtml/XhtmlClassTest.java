@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,19 +20,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class XhtmlClassTest {
     private WebDriver driver;
-    private static String text1;
-    private static String text2;
-    private static String tmp;
     
     @BeforeClass
     public static void setupClass(){
-        text1="Startseite";
-        text2="searchBtn";
+
     }
     
     @Before
     public void setUp(){
         driver = new FirefoxDriver();
+        driver.get("http://localhost:8080/WikiJEE/faces/show.xhtml");
     }
     
     @After
@@ -45,11 +43,11 @@ public class XhtmlClassTest {
     }
 
     private void eingabeSuche(){
-        driver.findElement(By.id("j_idt10:searchBtn")).click();
+        driver.findElement(By.id("searchForm:searchBtn")).click();
     }
     
     private void eingabeEdit(){
-        driver.findElement(By.name("text:j_idt30")).click();
+        driver.findElement(By.name("text:editBtn")).click();
     }
     
     private void eingabeUebernehmen(){
@@ -70,48 +68,52 @@ public class XhtmlClassTest {
     }
     
     private void nutzernameEingeben(String nutzername){
-        driver.findElement(By.name("name:j_idt8")).clear();
-        driver.findElement(By.name("name:j_idt8")).sendKeys(nutzername);
+        driver.findElement(By.name("name:nutzerName")).clear();
+        driver.findElement(By.name("name:nutzerName")).sendKeys(nutzername);
     }
     /*TODO: Rückgängig machen? Mit tmp zwischen gespeichert*/
     private void editTextEingeben(String text){
         driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
-        tmp = driver.findElement(By.xpath("html/body")).getText();
-        eingabeClearText();
+        driver.findElement(By.xpath("html/body")).sendKeys(Keys.CONTROL + "a");
         driver.findElement(By.xpath("html/body")).sendKeys(text);
     }
     
     private void enterStartseite(){
-        Startseite();
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Startseite"));
     }
     
     private void artikelErfolgreichEditieren(String name, String text){
-        Startseite();
         nutzernameEingeben(name);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.name("text:j_idt30")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("text:editBtn")));
         eingabeEdit();
         editTextEingeben(text);
+        driver.switchTo().defaultContent();
         eingabeUebernehmen();
-        Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains(text));   
+        Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Dies ist ein"));   
     }
     
+    /**
+     *  Artikel soll editiert werden, danach soll der Username herausgelöscht werden und der Button "Uebernehmen" aktiviert werden.
+     * Jedoch beim Klick auf Uebernehmen schreibt sich automatisch wieder der vorherige Nutzername ins Feld rein. Wenn man das
+     * Testszenario haendisch ausfuehrt, passiert das nicht.
+     * 
+     */
     private void artikelErfolglosEditieren(String name, String text){
-        Startseite();
-        nutzernameEingeben(name);
+         nutzernameEingeben(name);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.elementToBeClickable(By.name("text:j_idt30")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("text:editBtn")));
         eingabeEdit();
         editTextEingeben(text);
-        nutzernameEingeben("");
+        driver.switchTo().defaultContent();
+        driver.findElement(By.name("name:nutzerName")).clear();
+        
         eingabeUebernehmen();
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Kein Name eingegeben."));   
     }
     
     private void artikelOhneNutzernameEditieren(){
-        Startseite();
-        nutzernameEingeben("");
+         nutzernameEingeben("");
         try{
             eingabeEdit();
         }catch(Exception NoSuchElementException){
@@ -140,38 +142,35 @@ public class XhtmlClassTest {
     
     @Test
     public void testArtikelOhneNutzernameEditieren(){
-        Startseite();
         artikelOhneNutzernameEditieren();
     }
     
     @Test
     public void testArtikelErfolgreichEditieren(){
-        artikelErfolgreichEditieren("Testuser", "Dies ist ein [Test] unserer [Wikiseite]");
+        artikelErfolgreichEditieren("Testuser", "Dies ist ein [Test] unserer [Wikiseite] ");
     }
     
+    @Test
     public void testArtikelErfolglosEditieren(){
-        artikelErfolglosEditieren("Testuser", "Dies ist ein [Test] unserer [Wikiseite]");
+        artikelErfolglosEditieren("Testuser", "Dies ist ein [Test] unserer [Wikiseite] ");
     }
     
     @Test
     public void testErfolglosSuchen(){
-        Startseite();
-        artikelErfolglosSuchen("j_idt10:j_idt12", "nichtVorkommenderText");
+         artikelErfolglosSuchen("searchForm:searchInput", "nichtVorkommenderText");
 
     }
     
     @Test
     public void testErfolgreichSuchen(){
-        Startseite();
-        artikelErfolgreichSuchen("j_idt10:j_idt12", "Datenbank");
+        artikelErfolgreichSuchen("searchForm:searchInput", "Datenbank");
     }
 
     @Test
     public void testZurueckButtonEinmalNutzen(){
-        Startseite();
-        feldFuellen("j_idt10:j_idt12", "Entity");
+        feldFuellen("searchForm:searchInput", "Entity");
         eingabeSuche();
-        feldFuellen("j_idt10:j_idt12", "Datenbank");
+        feldFuellen("searchForm:searchInput", "Datenbank");
         eingabeSuche();
         eingabeZurueck();
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Entity"));
@@ -179,16 +178,14 @@ public class XhtmlClassTest {
     
     @Test
     public void testZurueckButtonZweimalNutzen(){
-        Startseite();
-        feldFuellen("j_idt10:j_idt12", "Entity");
+        feldFuellen("searchForm:searchInput", "Entity");
         eingabeSuche();
-        feldFuellen("j_idt10:j_idt12", "Datenbank");
+        feldFuellen("searchForm:searchInput", "Datenbank");
         eingabeSuche();
         eingabeZurueck();
         eingabeZurueck();
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Startseite"));     
     }
 
-
-    
+   
 }

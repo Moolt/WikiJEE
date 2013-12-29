@@ -17,7 +17,7 @@ and open the template in the editor.
                     <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button-->
                 </div>
                 <h:form id="name" styleClass="navbar-form navbar-left">
-                     <h:inputText value="#{usession.nutzerName}" styleClass="form-control nutzer" pt:placeholder="Nutzername">
+                     <h:inputText id="nutzerName" value="#{usession.nutzerName}" styleClass="form-control nutzer" pt:placeholder="Nutzername">
                         <f:ajax event="keyup" execute="@form" render=":text"/>
                    </h:inputText>
                         
@@ -25,9 +25,9 @@ and open the template in the editor.
                 </h:form>
                 
                 <div class="navbar-collapse collapse">
-                    <h:form styleClass="navbar-form navbar-right">
+                    <h:form styleClass="navbar-form navbar-right" id="searchForm">
 			<div class="form-group">
-                            <h:inputText value="#{search.suchbegriff}" styleClass="form-control" pt:placeholder="Search"/>
+                            <h:inputText value="#{search.suchbegriff}" id="searchInput" styleClass="form-control" pt:placeholder="Search"/>
 			</div>
                         <h:commandButton value="Search" id="searchBtn" action="#{search.suchen()}" styleClass="btn btn-default"/>
                     </h:form>              
