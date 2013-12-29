@@ -19,6 +19,14 @@ p{
     margin-left:-30px;
 }
 
+.clearBtn{
+    visibility: hidden;
+}
+
+.pull{
+    margin-top: 11px;
+}
+
 .navbar-collapse .btn{
     margin-left:5px;
     margin-bot:1px;
