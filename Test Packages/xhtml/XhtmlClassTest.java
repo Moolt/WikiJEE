@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class XhtmlClassTest {
     private WebDriver driver;
-    private static String tmp;
+    private static String tmp="";
     
     /**
      * Setup wird vor jedem Test ausgefuehrt. Es wir der driver fuer Firefox angelegt.
@@ -41,7 +41,7 @@ public class XhtmlClassTest {
         clean.get("http://localhost:8080/WikiJEE/show.xhtml");
         WebDriverWait wait = new WebDriverWait(clean, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
-        if(clean.findElement(By.tagName("body")).getText().contains("Dies ist ein")){
+        if(tmp!=""){
             clean.findElement(By.name("name:nutzerName")).clear();
             clean.findElement(By.name("name:nutzerName")).sendKeys("Michael");
             wait.until(ExpectedConditions.elementToBeClickable(By.name("text:editBtn")));
@@ -52,8 +52,7 @@ public class XhtmlClassTest {
             clean.findElement(By.xpath("html/body")).sendKeys(tmp);
             clean.switchTo().defaultContent();
             clean.findElement(By.name("editForm:submitBtn")).click();
-            
-            
+            tmp="";   
         }
         clean.quit();
         driver.quit();
