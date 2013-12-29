@@ -8,7 +8,7 @@
     <f:metadata>
         <f:viewParam name="thema" value="#{usession.thema}" />
     </f:metadata>
-    
+
     <h:head>
         #{usession.pushToBacklog("./show.xhtml")}
         <title>Mein Wiki, meine Regeln</title>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </h:panelGroup>
-            
+
                 <h:form id="text">
                     <div class="row">
                         <div class="col-xs-2">
@@ -52,19 +52,19 @@
                     <br/>
                     <h:commandButton value="Zurück" id="backBtn" action="#{usession.zurueck()}" styleClass="btn btn-default"/>  
                     <h:commandButton id="editBtn" rendered="#{usession.nameVorhanden()}" value="Bearbeiten" action="#{show.bearbeiten()}" styleClass="btn btn-default"/> 
-                               
+
                 </h:form>
             </div>
             <div class="jumbotron">
                 <h1>#{show.titel}</h1>
-                
+
                 <h:panelGroup id="thema">
                     <p>
-                    <h:outputText id="urlInput" escape="false" value="#{show.content}">
-                        <f:converter converterId="Converter.LinkConverter" />
-                    </h:outputText>        
+                        <h:outputText id="urlInput" escape="false" value="#{show.content}">
+                            <f:converter converterId="Converter.LinkConverter" />
+                        </h:outputText>        
                     </p>   
-              
+
                 </h:panelGroup>
             </div>           
         </div>

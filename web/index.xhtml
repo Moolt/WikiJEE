@@ -8,8 +8,7 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         #{usession.pushToBacklog("./index.xhtml")}
         <title>Weni Widi Wiki</title>
@@ -22,63 +21,65 @@ and open the template in the editor.
         <div class="container">
             <div class="navbarheader">
                 <ul class="nav nav-pills pull-right">
-                  <a href="./faces/show.xhtml" class="startseite">
-                    <li>
-                        <button type="button" class="btn btn-info btn-lg" href="./faces/show.xhtml">
-                          <span class="glyphicon glyphicon-play"></span> Zur Startseite
-                        </button>
-                     
-                    </li>
-                  </a>   
+                    <a href="./faces/show.xhtml" class="startseite">
+                        <li>
+                            <button type="button" class="btn btn-info btn-lg">
+                                <span class="glyphicon glyphicon-play"></span> Zur Startseite
+                            </button>
+
+                        </li>
+                    </a>   
                 </ul>
                 <h3 class="text-muted revback">Weni Widi Wiki</h3>
-              </div>
+            </div>
             <br/>  
             <div class="jumbotron">
-                    <h1>IndexSeite</h1><br />
-                    <h:form>
-                        <h:commandButton value="Aktualisieren" class="btn btn-default back" accesskey="#{index.aktualisieren()}"/>
-                        <h:inputText value="#{index.anzahl}">
-                            <f:ajax event="keyup" execute="@form" render=":liste"/>
-                        </h:inputText>
-                         Die * aktuellsten Artikel:
-                    </h:form><br />
-                        <table class="table table-striped">
-                            <thead>
+                <h1>Versions-Übersicht</h1><br />
+                <h:form>
+                    <h:commandButton value="Aktualisieren" class="btn btn-default back" accesskey="#{index.aktualisieren()}"/>
+                    <h:inputText value="#{index.anzahl}">
+                        <f:ajax event="keyup" execute="@form" render=":liste"/>
+                    </h:inputText>
+                    Die * aktuellsten Artikel:
+                </h:form><br />
+                <h:panelGroup id="liste">    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Topic-Name</th>
+                                <th>Zuletzt geändert am</th>
+                                <th>Zuletzt geändert von</th>
+                                <th>Neuste Version</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <ui:repeat value="#{index.aktuellsteThemen}" var="thema" varStatus="status">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Topic-Name</th>
-                                    <th>Zuletzt geändert am</th>
-                                    <th>Zuletzt geändert von</th>
-                                    <th>Neuste Version</th>
+                                    <td>#{status.index}</td>  
+                                    <td>
+                                        <h:link value="#{thema.name}" outcome="./show.xhtml">
+                                            <f:param name="thema" value="#{thema.name}" />
+                                        </h:link>
+                                    </td>
+                                    <td>
+                                        #{thema.letzteAenderungAsString}
+                                    </td>
+                                    <td>
+                                        #{thema.getContent(thema.latestVersion).getAuthor()}
+                                    </td>
+                                    <td>
+                                        #{thema.latestVersion}
+                                    </td> 
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <h:panelGroup id="liste">
-                                    <ui:repeat value="#{index.aktuellsteThemen}" var="thema" varStatus="status">
-                                        <tr>
-                                            <td>#{status.index}</td>  
-                                            <td>
-                                                <h:link value="#{thema.name}" outcome="./show.xhtml">
-                                                    <f:param name="thema" value="#{thema.name}" />
-                                                </h:link>
-                                            </td>
-                                            <td>
-                                                #{thema.letzteAenderungAsString}
-                                            </td>
-                                            <td>
-                                                #{thema.getContent(thema.latestVersion).getAuthor()}
-                                            </td>
-                                            <td>
-                                                #{thema.latestVersion}
-                                            </td> 
-                                        </tr>
-                                    </ui:repeat>
-                                </h:panelGroup>
-                            </tbody>
-                        </table>
-                    <br />
-                </div>
+                            </ui:repeat>
+
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <br />
+            </div>
         </div>
     </h:body>
 </html>
