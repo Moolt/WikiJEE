@@ -34,14 +34,15 @@ and open the template in the editor.
             <br/>  
             <div class="jumbotron">
                 <h1>Versions-Übersicht</h1><br />
-                <h:form>
-                    <h:commandButton value="Aktualisieren" class="btn btn-default back" accesskey="#{index.aktualisieren()}"/>
-                    <h:inputText value="#{index.anzahl}">
-                        <f:ajax event="keyup" execute="@form" render=":liste"/>
-                    </h:inputText>
-                    Die * aktuellsten Artikel:
-                </h:form><br />
-                <h:panelGroup id="liste">    
+                <h:panelGroup id="liste">   
+                    <h:form>
+                        <h:commandButton value="Aktualisieren" class="btn btn-default back" accesskey="#{index.aktualisieren()}"/>
+                        <h:inputText value="#{index.anzahl}">
+                            <f:ajax event="keyup" execute="@form" render=":liste"/>
+                        </h:inputText>
+                        Die #{index.anzahl} aktuellsten Artikel:
+                    </h:form><br />
+                    
                     <table class="table table-striped">
                         <thead>
                             <tr>
